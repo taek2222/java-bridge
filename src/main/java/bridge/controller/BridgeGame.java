@@ -25,6 +25,8 @@ public class BridgeGame {
 
         Bridge bridge = createBridge();
 
+        String moving = inputView.readMoving();
+
     }
 
     private Bridge createBridge() {

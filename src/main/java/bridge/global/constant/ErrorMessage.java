@@ -1,7 +1,7 @@
 package bridge.global.constant;
 
 public enum ErrorMessage {
-//    INVALID_INPUT("유효 하지 않은 입력 입니다."),
+    INVALID_INPUT("유효 하지 않은 입력 입니다."),
 //    INVALID_FORMAT("입력값의 형식이 잘못되었습니다."),
     OUT_OF_BRIDGE_SIZE_RANGE("다리 길이는 %d부터 %d 사이의 숫자여야 합니다."),
 //    INVALID_LENGTH("입력값의 길이가 잘못되었습니다. (%d ~ %d자)"),

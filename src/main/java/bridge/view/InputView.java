@@ -1,5 +1,6 @@
 package bridge.view;
 
+import bridge.global.constant.ErrorMessage;
 import bridge.global.validation.CommonValidator;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -16,17 +17,21 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    /**
-     * 사용자가 이동할 칸을 입력받는다.
-     */
     public String readMoving() {
+        System.out.println("이동할 칸을 선택해주세요. (위: U, 아래: D)");
+
+        String input = Console.readLine().toUpperCase();
+        validateMove(input);
+        return input;
+    }
+
+    public String readGameCommand() {
         return null;
     }
 
-    /**
-     * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-     */
-    public String readGameCommand() {
-        return null;
+    private void validateMove(String input) {
+        if (!input.equals("U") && !input.equals("D")) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.get());
+        }
     }
 }
