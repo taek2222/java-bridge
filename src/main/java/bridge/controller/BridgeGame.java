@@ -27,29 +27,26 @@ public class BridgeGame {
         Bridge bridge = createBridge();
         Count count = new Count();
 
-        while (true) {
+        do {
+            bridge.clear();
             count.increase();
             processGame(bridge);
 
             if (bridge.isWinner()) {
                 break;
             }
+        } while (retry());
+        displayResult(bridge, count);
+    }
 
-            if (!inputView.readRetryCommand()) {
-                break;
-            }
-
-            bridge.clear();
-        }
-
+    private void displayResult(final Bridge bridge, final Count count) {
         outputView.printResult(bridge.createResponse());
         outputView.printTotalCount(count.createResponse());
     }
 
     private void processGame(Bridge bridge) {
         while (!bridge.isPossible()) {
-            String moving = inputView.readMoving();
-            bridge.addMoving(moving);
+            move(bridge);
 
             BridgeResponse response = bridge.createResponse();
             outputView.printMap(response);
@@ -64,6 +61,18 @@ public class BridgeGame {
         return new Bridge(bridge);
     }
 
+    private void move(final Bridge bridge) {
+        while(true) {
+            try {
+                String moving = inputView.readMoving();
+                bridge.addMoving(moving);
+                return;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
     private List<String> initializeBridge() {
         while(true) {
             try {
@@ -76,20 +85,14 @@ public class BridgeGame {
         }
     }
 
-    /**
-     * 사용자가 칸을 이동할 때 사용하는 메서드
-     * <p>
-     * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void move() {
-    }
-
-    /**
-     * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-     * <p>
-     * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void retry() {
+    private boolean retry() {
+        while(true) {
+            try {
+                return inputView.readRetryCommand();
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
     }
 
     private void displayGameStartMessage() {
