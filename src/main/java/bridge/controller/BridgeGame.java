@@ -33,10 +33,15 @@ public class BridgeGame {
     }
 
     private List<String> initializeBridge() {
-        int bridgeSize = inputView.readBridgeSize();
-        BridgeMaker bridgeMaker = new BridgeMaker(bridgeNumberGenerator);
-
-        return bridgeMaker.makeBridge(bridgeSize);
+        while(true) {
+            try {
+                int bridgeSize = inputView.readBridgeSize();
+                BridgeMaker bridgeMaker = new BridgeMaker(bridgeNumberGenerator);
+                return bridgeMaker.makeBridge(bridgeSize);
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
     }
 
     /**
