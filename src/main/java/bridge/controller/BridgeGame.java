@@ -26,18 +26,14 @@ public class BridgeGame {
     public void run() {
         displayGameStartMessage();
         Count count = new Count();
-
         Bridge bridge = createBridge();
 
         do {
             bridge.clear();
             count.increment();
             processGame(bridge);
+        } while (retry(bridge));
 
-            if (bridge.isWinner()) {
-                break;
-            }
-        } while (retry());
         displayResult(bridge, count);
     }
 
@@ -49,10 +45,13 @@ public class BridgeGame {
     private void processGame(Bridge bridge) {
         while (bridge.isPossible()) {
             move(bridge);
-
-            BridgeResponse response = bridge.createResponse();
-            outputView.printMap(response);
+            displayBridge(bridge);
         }
+    }
+
+    private void displayBridge(final Bridge bridge) {
+        BridgeResponse response = bridge.createResponse();
+        outputView.printMap(response);
     }
 
     private Bridge createBridge() {
@@ -84,7 +83,10 @@ public class BridgeGame {
         }
     }
 
-    private boolean retry() {
+    private boolean retry(final Bridge bridge) {
+        if (bridge.isWinner()) {
+            return false;
+        }
         while(true) {
             try {
                 return inputView.readRetryCommand();

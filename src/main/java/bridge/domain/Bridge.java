@@ -19,22 +19,18 @@ public class Bridge {
     }
 
     public boolean isWinner() {
-        return isMaxMove() || isLastMoveEquals();
+        return isMaxMoving() && isLastMoveEquals();
     }
 
     public boolean isPossible() {
         if (moves.isEmpty())
             return true;
 
-        if (isMaxMove()) {
+        if (isMaxMoving()) {
             return false;
         }
 
         return isLastMoveEquals();
-    }
-
-    public boolean isMaxMove() {
-        return answer.size() == moves.size();
     }
 
     public void clear() {
@@ -43,6 +39,10 @@ public class Bridge {
 
     public BridgeResponse createResponse() {
         return BridgeResponse.createResponse(answer, moves, isWinner());
+    }
+
+    private boolean isMaxMoving() {
+        return answer.size() == moves.size();
     }
 
     private boolean isLastMoveEquals() {
