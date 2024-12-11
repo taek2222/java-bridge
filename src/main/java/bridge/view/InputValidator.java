@@ -2,6 +2,8 @@ package bridge.view;
 
 import static bridge.global.constant.ErrorMessage.INVALID_INPUT;
 
+import bridge.global.constant.ErrorMessage;
+
 public class InputValidator {
 
     private static final String UP = "U";
@@ -18,6 +20,14 @@ public class InputValidator {
     protected static void validateRetryCommand(String input) {
         if (!input.equals(RETRY) && !input.equals(QUIT)) {
             throw new IllegalArgumentException(INVALID_INPUT.get());
+        }
+    }
+
+    protected static void validateIsNumeric(String input) { //
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMERIC.get());
         }
     }
 }

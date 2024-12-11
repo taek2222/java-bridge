@@ -4,10 +4,10 @@ import static bridge.global.constant.MessageConstant.INPUT_BRIDGE_SIZE;
 import static bridge.global.constant.MessageConstant.INPUT_MOVING;
 import static bridge.global.constant.MessageConstant.INPUT_RETRY_COMMAND;
 import static bridge.global.constant.MessageConstant.NEW_LINE;
+import static bridge.view.InputValidator.validateIsNumeric;
 import static bridge.view.InputValidator.validateMove;
 import static bridge.view.InputValidator.validateRetryCommand;
 
-import bridge.global.validation.CommonValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
@@ -18,7 +18,7 @@ public class InputView {
         System.out.println(INPUT_BRIDGE_SIZE.get());
 
         String input = Console.readLine();
-        CommonValidator.validateIsNumeric(input);
+        validateIsNumeric(input);
         return Integer.parseInt(input);
     }
 
