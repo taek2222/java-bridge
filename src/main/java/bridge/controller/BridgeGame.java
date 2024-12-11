@@ -15,7 +15,8 @@ public class BridgeGame {
     private final OutputView outputView;
     private final BridgeNumberGenerator bridgeNumberGenerator;
 
-    public BridgeGame(final InputView inputView, final OutputView outputView,
+    public BridgeGame(final InputView inputView,
+                      final OutputView outputView,
                       final BridgeNumberGenerator bridgeNumberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
@@ -24,12 +25,13 @@ public class BridgeGame {
 
     public void run() {
         displayGameStartMessage();
-        Bridge bridge = createBridge();
         Count count = new Count();
+
+        Bridge bridge = createBridge();
 
         do {
             bridge.clear();
-            count.increase();
+            count.increment();
             processGame(bridge);
 
             if (bridge.isWinner()) {

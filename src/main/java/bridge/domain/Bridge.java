@@ -14,10 +14,6 @@ public class Bridge {
         this.moves = new ArrayList<>();
     }
 
-    public void clear() {
-        moves.clear();
-    }
-
     public void addMoving(String moving) {
         moves.add(moving);
     }
@@ -40,27 +36,10 @@ public class Bridge {
     }
 
     public BridgeResponse createResponse() {
-        List<String> upMoves = new ArrayList<>();
-        List<String> downMoves = new ArrayList<>();
-
-        for (int index = 0; index < moves.size(); index++) {
-            String bridge = checkBridge(answer.get(index), moves.get(index));
-
-            if (moves.get(index).equals("U")) {
-                upMoves.add(bridge);
-                downMoves.add(" ");
-                continue;
-            }
-
-            downMoves.add(bridge);
-            upMoves.add(" ");
-        }
-        return new BridgeResponse(upMoves, downMoves, isWinner());
+        return BridgeResponse.createResponse(answer, moves, isWinner());
     }
 
-    private String checkBridge(String answer, String move) {
-        if (answer.equals(move))
-            return "O";
-        return "X";
+    public void clear() {
+        moves.clear();
     }
 }
