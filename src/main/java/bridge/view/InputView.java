@@ -1,23 +1,29 @@
 package bridge.view;
 
+import static bridge.global.constant.MessageConstant.INPUT_BRIDGE_SIZE;
+import static bridge.global.constant.MessageConstant.INPUT_MOVING;
+import static bridge.global.constant.MessageConstant.INPUT_RETRY_COMMAND;
 import static bridge.global.constant.MessageConstant.NEW_LINE;
+import static bridge.view.InputValidator.validateMove;
+import static bridge.view.InputValidator.validateRetryCommand;
 
-import bridge.global.constant.ErrorMessage;
 import bridge.global.validation.CommonValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
-    public int readBridgeSize() {
-        System.out.println("다리의 길이를 입력해주세요.");
-        String input = Console.readLine();
+    private static final String RETRY_COMMAND = "R";
 
+    public int readBridgeSize() {
+        System.out.println(INPUT_BRIDGE_SIZE.get());
+
+        String input = Console.readLine();
         CommonValidator.validateIsNumeric(input);
         return Integer.parseInt(input);
     }
 
     public String readMoving() {
-        System.out.println(NEW_LINE.get() + "이동할 칸을 선택해주세요. (위: U, 아래: D)");
+        System.out.println(NEW_LINE.get() + INPUT_MOVING.get());
 
         String input = Console.readLine().toUpperCase();
         validateMove(input);
@@ -25,7 +31,7 @@ public class InputView {
     }
 
     public boolean readRetryCommand() {
-        System.out.println("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)");
+        System.out.println(INPUT_RETRY_COMMAND.get());
 
         String input = Console.readLine().toUpperCase();
         validateRetryCommand(input);
