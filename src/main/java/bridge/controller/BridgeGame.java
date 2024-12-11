@@ -23,14 +23,15 @@ public class BridgeGame {
 
     public void run() {
         displayGameStartMessage();
-
         Bridge bridge = createBridge();
 
-        String moving = inputView.readMoving();
-        bridge.addMoving(moving);
+        while (!bridge.isFail()) {
+            String moving = inputView.readMoving();
+            bridge.addMoving(moving);
 
-        BridgeResponse response = bridge.createResponse();
-        outputView.printMap(response);
+            BridgeResponse response = bridge.createResponse();
+            outputView.printMap(response);
+        }
     }
 
     private Bridge createBridge() {

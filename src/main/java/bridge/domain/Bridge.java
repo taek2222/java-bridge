@@ -18,6 +18,11 @@ public class Bridge {
         moves.add(moving);
     }
 
+    public boolean isFail() {
+        int lastIndex = moves.size() - 1;
+        return !moves.isEmpty() && !moves.get(lastIndex).equals(answer.get(lastIndex));
+    }
+
     public BridgeResponse createResponse() {
         List<String> upMoves = new ArrayList<>();
         List<String> downMoves = new ArrayList<>();

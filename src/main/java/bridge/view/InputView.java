@@ -1,5 +1,7 @@
 package bridge.view;
 
+import static bridge.global.constant.MessageConstant.NEW_LINE;
+
 import bridge.global.constant.ErrorMessage;
 import bridge.global.validation.CommonValidator;
 import camp.nextstep.edu.missionutils.Console;
@@ -18,7 +20,7 @@ public class InputView {
     }
 
     public String readMoving() {
-        System.out.println("이동할 칸을 선택해주세요. (위: U, 아래: D)");
+        System.out.println(NEW_LINE.get() + "이동할 칸을 선택해주세요. (위: U, 아래: D)");
 
         String input = Console.readLine().toUpperCase();
         validateMove(input);
