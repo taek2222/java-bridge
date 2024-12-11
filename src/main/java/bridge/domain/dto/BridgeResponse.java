@@ -9,6 +9,9 @@ public record BridgeResponse(
         boolean isSuccess
 ) {
 
+    private static final String BLANK = " ";
+    private static final String UP = "U";
+
     public static BridgeResponse createResponse(final List<String> answer, final List<String> moves, final boolean winner) {
             List<String> upMoves = new ArrayList<>();
             List<String> downMoves = new ArrayList<>();
@@ -18,11 +21,11 @@ public record BridgeResponse(
 
                 if (isIndexOfUp(moves.get(index))) {
                     upMoves.add(bridge);
-                    downMoves.add(" ");
+                    downMoves.add(BLANK);
                     continue;
                 }
                 downMoves.add(bridge);
-                upMoves.add(" ");
+                upMoves.add(BLANK);
             }
             return new BridgeResponse(upMoves, downMoves, winner);
     }
@@ -34,6 +37,6 @@ public record BridgeResponse(
     }
 
     private static boolean isIndexOfUp(final String move) {
-        return move.equals("U");
+        return move.equals(UP);
     }
 }
