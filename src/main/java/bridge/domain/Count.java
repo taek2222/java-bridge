@@ -4,13 +4,9 @@ import bridge.domain.dto.CountResponse;
 
 public class Count {
 
-    private int count;
+    private int count = 0;
 
-    public Count() {
-        this.count = 0;
-    }
-
-    public void increase() {
+    public void increment() {
         count++;
     }
 
