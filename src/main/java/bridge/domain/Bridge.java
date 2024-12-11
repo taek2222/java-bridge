@@ -1,5 +1,6 @@
 package bridge.domain;
 
+import bridge.domain.dto.BridgeResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,5 +14,32 @@ public class Bridge {
         this.moves = new ArrayList<>();
     }
 
+    public void addMoving(String moving) {
+        moves.add(moving);
+    }
 
+    public BridgeResponse createResponse() {
+        List<String> upMoves = new ArrayList<>();
+        List<String> downMoves = new ArrayList<>();
+
+        for (int index = 0; index < moves.size(); index++) {
+            String bridge = checkBridge(answer.get(index), moves.get(index));
+
+            if (moves.get(index).equals("U")) {
+                upMoves.add(bridge);
+                downMoves.add(" ");
+                continue;
+            }
+
+            downMoves.add(bridge);
+            upMoves.add(" ");
+        }
+        return new BridgeResponse(upMoves, downMoves);
+    }
+
+    private String checkBridge(String answer, String move) {
+        if (answer.equals(move))
+            return "O";
+        return "X";
+    }
 }

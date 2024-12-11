@@ -2,6 +2,7 @@ package bridge.controller;
 
 import bridge.domain.Bridge;
 import bridge.domain.BridgeMaker;
+import bridge.domain.dto.BridgeResponse;
 import bridge.global.util.BridgeNumberGenerator;
 import bridge.view.InputView;
 import bridge.view.OutputView;
@@ -26,7 +27,10 @@ public class BridgeGame {
         Bridge bridge = createBridge();
 
         String moving = inputView.readMoving();
+        bridge.addMoving(moving);
 
+        BridgeResponse response = bridge.createResponse();
+        outputView.printMap(response);
     }
 
     private Bridge createBridge() {
