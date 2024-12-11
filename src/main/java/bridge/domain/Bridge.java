@@ -14,13 +14,29 @@ public class Bridge {
         this.moves = new ArrayList<>();
     }
 
+    public void clear() {
+        moves.clear();
+    }
+
     public void addMoving(String moving) {
         moves.add(moving);
     }
 
-    public boolean isFail() {
+    public boolean isWinner() {
+        return isMaxMove() || isLastMoveEquals();
+    }
+
+    public boolean isPossible() {
+        return !moves.isEmpty() && !isLastMoveEquals();
+    }
+
+    public boolean isMaxMove() {
+        return answer.size() == moves.size();
+    }
+
+    private boolean isLastMoveEquals() {
         int lastIndex = moves.size() - 1;
-        return !moves.isEmpty() && !moves.get(lastIndex).equals(answer.get(lastIndex));
+        return moves.get(lastIndex).equals(answer.get(lastIndex));
     }
 
     public BridgeResponse createResponse() {
@@ -39,7 +55,7 @@ public class Bridge {
             downMoves.add(bridge);
             upMoves.add(" ");
         }
-        return new BridgeResponse(upMoves, downMoves);
+        return new BridgeResponse(upMoves, downMoves, isWinner());
     }
 
     private String checkBridge(String answer, String move) {

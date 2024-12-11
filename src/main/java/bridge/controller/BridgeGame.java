@@ -2,6 +2,7 @@ package bridge.controller;
 
 import bridge.domain.Bridge;
 import bridge.domain.BridgeMaker;
+import bridge.domain.Count;
 import bridge.domain.dto.BridgeResponse;
 import bridge.global.util.BridgeNumberGenerator;
 import bridge.view.InputView;
@@ -24,13 +25,37 @@ public class BridgeGame {
     public void run() {
         displayGameStartMessage();
         Bridge bridge = createBridge();
+        Count count = new Count();
 
-        while (!bridge.isFail()) {
+        while (true) {
+            count.increase();
+            processGame(bridge);
+
+            if (bridge.isWinner()) {
+                break;
+            }
+
+            if (!inputView.readRetryCommand()) {
+                break;
+            }
+
+            bridge.clear();
+        }
+
+        outputView.printResult(bridge.createResponse());
+        outputView.printTotalCount(count.createResponse());
+    }
+
+    private void processGame(Bridge bridge) {
+        while (!bridge.isPossible()) {
             String moving = inputView.readMoving();
             bridge.addMoving(moving);
 
             BridgeResponse response = bridge.createResponse();
             outputView.printMap(response);
+
+            if (bridge.isMaxMove())
+                break;
         }
     }
 

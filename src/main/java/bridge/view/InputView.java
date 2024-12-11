@@ -6,9 +6,6 @@ import bridge.global.constant.ErrorMessage;
 import bridge.global.validation.CommonValidator;
 import camp.nextstep.edu.missionutils.Console;
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 public class InputView {
 
     public int readBridgeSize() {
@@ -27,12 +24,22 @@ public class InputView {
         return input;
     }
 
-    public String readGameCommand() {
-        return null;
+    public boolean readRetryCommand() {
+        System.out.println("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)");
+
+        String input = Console.readLine().toUpperCase();
+        validateRetryCommand(input);
+        return input.equals("R");
     }
 
     private void validateMove(String input) {
         if (!input.equals("U") && !input.equals("D")) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.get());
+        }
+    }
+
+    private void validateRetryCommand(String input) {
+        if (!input.equals("R") && !input.equals("Q")) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.get());
         }
     }
