@@ -23,7 +23,14 @@ public class Bridge {
     }
 
     public boolean isPossible() {
-        return !moves.isEmpty() && !isLastMoveEquals();
+        if (moves.isEmpty())
+            return true;
+
+        if (isMaxMove()) {
+            return false;
+        }
+
+        return isLastMoveEquals();
     }
 
     public boolean isMaxMove() {

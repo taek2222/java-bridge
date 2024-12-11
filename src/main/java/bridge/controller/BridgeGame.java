@@ -47,14 +47,11 @@ public class BridgeGame {
     }
 
     private void processGame(Bridge bridge) {
-        while (!bridge.isPossible()) {
+        while (bridge.isPossible()) {
             move(bridge);
 
             BridgeResponse response = bridge.createResponse();
             outputView.printMap(response);
-
-            if (bridge.isMaxMove())
-                break;
         }
     }
 
