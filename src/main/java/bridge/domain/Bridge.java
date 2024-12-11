@@ -30,16 +30,16 @@ public class Bridge {
         return answer.size() == moves.size();
     }
 
-    private boolean isLastMoveEquals() {
-        int lastIndex = moves.size() - 1;
-        return moves.get(lastIndex).equals(answer.get(lastIndex));
+    public void clear() {
+        moves.clear();
     }
 
     public BridgeResponse createResponse() {
         return BridgeResponse.createResponse(answer, moves, isWinner());
     }
 
-    public void clear() {
-        moves.clear();
+    private boolean isLastMoveEquals() {
+        int lastIndex = moves.size() - 1;
+        return moves.get(lastIndex).equals(answer.get(lastIndex));
     }
 }

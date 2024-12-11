@@ -31,8 +31,7 @@ public class BridgeMaker {
 
     private void validateBridgeSize(int size) {
         if (size < MINIMUM_SIZE || size > MAXIMUM_SIZE) {
-            throw new IllegalArgumentException(
-                    OUT_OF_BRIDGE_SIZE_RANGE
+            throw new IllegalArgumentException(OUT_OF_BRIDGE_SIZE_RANGE
                             .get(MINIMUM_SIZE, MAXIMUM_SIZE));
         }
     }
