@@ -29,18 +29,6 @@ public class InputView {
 
         String input = Console.readLine().toUpperCase();
         validateRetryCommand(input);
-        return input.equals("R");
-    }
-
-    private void validateMove(String input) {
-        if (!input.equals("U") && !input.equals("D")) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.get());
-        }
-    }
-
-    private void validateRetryCommand(String input) {
-        if (!input.equals("R") && !input.equals("Q")) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.get());
-        }
+        return input.equals(RETRY_COMMAND);
     }
 }
